@@ -1,44 +1,46 @@
 import 'package:dart_application_1/dart_application_1.dart' as dart_application_1;
 
 void main() {
-  List<int> notes = [12, 8, 15, 17, 9];
+  final etudiants = [
+    Etudiant(nom: 'Ahmed', moyenne: 14.5),
+    Etudiant(nom: 'Sarra', moyenne: 9.0),
+    Etudiant(nom: 'Youssef', moyenne: 12.0),
+  ];
 
-  // TODO 1 : ajouter la note 11 à la liste
-  notes.add(11);
-
-  // TODO 2 : afficher le nombre de notes (propriété length)
-  print('Nombre de notes : ${notes.length}');
-
-  // TODO 3 : afficher chaque note, une par ligne, avec une boucle for
-  for (int note in notes) {
-    print('Note : $note');
+  // TODO 4 : afficher chaque étudiant (une boucle for)
+  for (Etudiant etudiant in etudiants) {
+    print(etudiant);
   }
 
-  // TODO 4 : créer une liste des notes >= 10 avec where, puis l'afficher
-  List<int> notesSup10 = notes.where((n) => n >= 10).toList();
-  print('Notes >= 10 : $notesSup10');
-
-  // TODO 5 : calculer et afficher la moyenne
-
-  // indice : une boucle et une variable somme
-  int somme = 0;
-  for (int note in notes) {
-    somme += note;
+  // TODO 5 : afficher uniquement les admis (moyenne >= 10)
+ 
+   
+   print(' admis :');
+  // indice : etudiants.where((e) => e.estAdmis)
+  for (Etudiant etudiant in etudiants.where((e) => e.estAdmis)) {
+    print(etudiant.nom);
   }
-  double moyenne = notes.isEmpty ? 0 : somme / notes.length;
-  print('Moyenne : $moyenne');
 
-  Map<String, int> ages = {'Ahmed': 22, 'Sarra': 21};
-
-  // TODO 6 : ajouter 'Youssef' avec l'âge 23
-  ages['Youssef'] = 23;
-
-  // TODO 7 : parcourir la map et afficher 'Ahmed a 22 ans'
-  ages.forEach((nom, age) {
-    print('$nom a $age ans');
-  });
-
-  // indice : ages.forEach((cle, valeur) { ... });
-  // Une List stocke des éléments dans un ordre avec des indices, tandis qu'une Map stocke des valeurs associées à des clés.
+  // TODO 5 bis : afficher le nombre d'étudiants admis
 
 }
+class Etudiant {
+  // TODO 1 : déclarer final nom (String) et final moyenne (double)
+  final String nom;
+  final double moyenne;
+
+  // TODO 2 : constructeur avec paramètres nommés obligatoires
+  Etudiant({required this.nom, required this.moyenne});
+
+  // TODO 3 : getter estAdmis qui renvoie true si moyenne >= 10
+  bool get estAdmis => moyenne >= 10;
+
+  // TODO 3 bis : redéfinir toString() pour renvoyer
+  @override
+  // 'Ahmed - 14.5 (admis)' ou 'Sarra - 9.0 (non admis)'
+  String toString() {
+    return '$nom - $moyenne (${estAdmis ? 'admis' : 'non admis'})';
+  }
+  // On déclare les propriétés en final pour éviter qu'elles soient modifiées après la création de l'objet et garantir leur stabilité.
+}
+
